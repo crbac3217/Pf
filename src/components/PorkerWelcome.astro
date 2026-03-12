@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import porkerBorder_NoType from '../assets/porkerBorder_NoType.svg';
 import porkerBorder_OnlyType from '../assets/porkerBorder_OnlyType.svg';
+import instaIcon from '../assets/insta.svg';
 ---
 
 <div id="container">
@@ -11,13 +12,26 @@ import porkerBorder_OnlyType from '../assets/porkerBorder_OnlyType.svg';
     </div>
 
     <nav class="neon-nav">
-        <a href={`${import.meta.env.BASE_URL}/about`} class="neon-button">ABOUT US</a>
-        <a href={`${import.meta.env.BASE_URL}/menu`} class="neon-button">MENU</a>
-        <a href="https://www.google.com/maps/reserve/v/waitlist?c=gX3QiII5N7w&source=pa&opi=89978449&hl=en-CA&gei=GzCmafqyDcGs0PEPhLiBqQg&sourceurl=https://www.google.com/search?q%3Dporker%2Bface%2B%28korean%2Bpork%2Bbelly%29%26rlz%3D1C1VDKB_enCA1113CA1113%26oq%3Dporke%26gs_lcrp%3DEgZjaHJvbWUqBggBEEUYOzIGCAAQRRg8MgYIARBFGDsyBggCEEUYOzIGCAMQRRg5MgYIBBBFGDsyBggFEEUYOzIGCAYQRRg9MgYIBxBFGD3SAQgyMTgxajBqN6gCALACAA%26sourceid%3Dchrome%26ie%3DUTF-8&ps=2" class="neon-button">JOIN THE WAITLIST</a>
+        <a href={`${import.meta.env.BASE_URL}/about`} class="neon-button neon-title">ABOUT US</a>
+        <a href={`${import.meta.env.BASE_URL}/menu`} class="neon-button neon-title">MENU</a>
+        <a href="https://www.google.com/maps/reserve/v/waitlist?c=gX3QiII5N7w&source=pa&opi=89978449&hl=en-CA&gei=GzCmafqyDcGs0PEPhLiBqQg&sourceurl=https://www.google.com/search?q%3Dporker%2Bface%2B%28korean%2Bpork%2Bbelly%29%26rlz%3D1C1VDKB_enCA1113CA1113%26oq%3Dporke%26gs_lcrp%3DEgZjaHJvbWUqBggBEEUYOzIGCAAQRRg8MgYIARBFGDsyBggCEEUYOzIGCAMQRRg5MgYIBBBFGDsyBggFEEUYOzIGCAYQRRg9MgYIBxBFGD3SAQgyMTgxajBqN6gCALACAA%26sourceid%3Dchrome%26ie%3DUTF-8&ps=2" class="neon-button neon-title">JOIN THE WAITLIST</a>
     </nav>
+	<div class="social-wrapper">
+        <a href="https://www.instagram.com/porkerface_official/" target="_blank" rel="noopener noreferrer" class="social-icon">
+            <img src={instaIcon.src} alt="Instagram" />
+        </a>
+    </div>
 </div>
 
 <style>
+	.neon-title {
+		font-family: 'PFfont', sans-serif; /* ✔️ 여기에만 적용! */
+		font-size: 3rem;
+		margin: 0 0 1rem 0;
+		color: #ffffff;
+		text-shadow: 0 0 5px #fc35d1, 0 0 15px #fc35d1, 0 0 30px #fc35d1;
+		letter-spacing: 4px;
+	}
 	#container {
 		position: relative; 
 		display: flex;
@@ -89,6 +103,36 @@ import porkerBorder_OnlyType from '../assets/porkerBorder_OnlyType.svg';
 		text-shadow: 0 0 10px #fc35d1, 0 0 25px #fc35d1, 0 0 50px #fc35d1;
 		transform: scale(1.1); 
 	}
+	/* --- Social Icon Styles --- */
+    .social-wrapper {
+        position: absolute;
+        bottom: 12%; 
+        left: 0;
+        right: 0; /* left와 right를 0으로 줘서 화면 가로 전체를 꽉 잡게 만듭니다 */
+        margin: 0 auto; /* 완벽한 중앙 강제 정렬 */
+        display: flex;
+        justify-content: center;
+        z-index: 50; /* 다른 요소(로고)에 밀리지 않게 위로 띄움 */
+        
+        /* 핵심 픽스: 'forwards' 대신 'both'를 써야 3초 대기 시간 동안에도 투명도 0%를 완벽하게 유지합니다 */
+        animation: fade-in-up 0.8s ease-out 3s both; 
+    }
+    .social-icon {
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+
+    .social-icon img {
+        width: 40px; /* 아이콘 크기 조절 */
+        height: 40px;
+        /* 아이콘 자체에도 은은한 핑크 네온 효과 부여 */
+        filter: drop-shadow(0 0 7px #fc35d1) drop-shadow(0 0 10px rgba(252, 53, 209, 0.5));
+    }
+
+    .social-icon:hover {
+        transform: scale(1.2) translateY(-5px);
+        filter: drop-shadow(0 0 15px #fc35d1) drop-shadow(0 0 30px #fc35d1);
+    }
 
 	/* --- Animations --- */
 	@keyframes move-to-top {
@@ -154,5 +198,8 @@ import porkerBorder_OnlyType from '../assets/porkerBorder_OnlyType.svg';
 				transform: translateY(-30vh) scale(0.5); 
 			}
 		}
+		.social-wrapper {
+            bottom: 8%; /* 모바일에서는 살짝 더 아래로 */
+        }
 	}
 </style>
